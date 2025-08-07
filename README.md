@@ -28,7 +28,8 @@ npm install react-toastify
 ```
 ├── toast.tsx           # Main utility functions
 ├── globals.css         # Toast-specific styling
-└── usage.tsx          # Example implementation
+├── usage.tsx          	# Example implementation
+└── layout.tsx		# Root Layout
 ```
 
 ## Setup
