@@ -13,7 +13,7 @@ export function toastSuccess(message: string, description?: string) {
 		</div>,
 		{
 			position: "bottom-right",
-			autoClose: 999999,
+			autoClose: 5000,
 			hideProgressBar: false,
 			closeOnClick: true,
 			pauseOnHover: true,

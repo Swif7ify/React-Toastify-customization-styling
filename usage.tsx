@@ -1,3 +1,5 @@
+import React from "react";
+
 import { toastSuccess, toastError, toastWarning, toastInfo } from "@/utils/toast";
 
 export default function ToastTest() {
