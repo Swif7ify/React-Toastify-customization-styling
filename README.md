@@ -28,8 +28,7 @@ npm install react-toastify
 ```
 ├── toast.tsx           # Main utility functions
 ├── globals.css         # Toast-specific styling
-├── usage.tsx          	# Example implementation
-└── layout.tsx		# Root Layout
+└── usage.tsx          # Example implementation
 ```
 
 ## Setup
@@ -58,15 +57,35 @@ import { toastSuccess, toastError, toastWarning, toastInfo } from "@/utils/toast
 Don't forget to add the `ToastContainer` to your main App component:
 
 ```tsx
-import { ToastContainer } from "react-toastify";
+// app/layout.tsx
+import "./globals.css";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+export const metadata = {
+	title: "Your App Title",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="App">
-			{children}{" "}
-			<ToastContainer />
-		</div>
+		<html lang="en">
+			<body>
+				{children}
+				<ToastContainer
+					position="bottom-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="colored"
+					transition={Slide}
+				/>
+			</body>
+		</html>
 	);
 }
 ```
@@ -107,16 +126,16 @@ toastInfo(message: string, description?: string)
 
 ### Toast Settings
 
-| Setting        | Success                        | Error/Warning/Info |
-| -------------- | ------------------------------ | ------------------ |
-| Position       | bottom-right                   | bottom-right       |
+| Setting        | Success                      | Error/Warning/Info |
+| -------------- | ---------------------------- | ------------------ |
+| Position       | bottom-right                 | bottom-right       |
 | Auto Close     | 5000ms (virtually permanent) | 5000ms             |
-| Progress Bar   | Visible                        | Visible            |
-| Close on Click | Yes                            | Yes                |
-| Pause on Hover | Yes                            | Yes                |
-| Draggable      | Yes                            | Yes                |
-| Theme          | Colored                        | Colored            |
-| Transition     | Slide                          | Slide              |
+| Progress Bar   | Visible                      | Visible            |
+| Close on Click | Yes                          | Yes                |
+| Pause on Hover | Yes                          | Yes                |
+| Draggable      | Yes                          | Yes                |
+| Theme          | Colored                      | Colored            |
+| Transition     | Slide                        | Slide              |
 
 ### Visual Structure
 
@@ -155,6 +174,27 @@ Modify the CSS in `globals.css` to change the appearance:
 	font-weight: 600; /* Adjust font weight */
 	color: #333; /* Change title color */
 }
+```
+
+Custom Toast Structure in toast.tsx
+
+```jsx
+<div style={{ display: "flex" }}>
+	<span className="mr-2" /> {/* Icon space */}
+	<div>
+		<strong>{message}</strong> {/* Title */}
+		{description && (
+			<div
+				style={{
+					fontSize: "0.9em",
+					marginTop: "4px",
+				}}
+			>
+				{description} {/* Description */}
+			</div>
+		)}
+	</div>
+</div>
 ```
 
 ## Example Implementation
